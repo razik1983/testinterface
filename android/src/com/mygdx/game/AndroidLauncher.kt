@@ -1,10 +1,8 @@
 package com.mygdx.game
 
-import android.app.Activity
-import com.badlogic.gdx.backends.android.AndroidApplication
 import android.os.Bundle
+import com.badlogic.gdx.backends.android.AndroidApplication
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
-import com.mygdx.game.MyGame
 
 class AndroidLauncher : AndroidApplication() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +10,24 @@ class AndroidLauncher : AndroidApplication() {
         val config = AndroidApplicationConfiguration()
         config.useAccelerometer = false;
         config.useCompass = false;
-        initialize(MyGame(), config)
+        initialize(MyGame(AndroidLeaderboard()), config)
+    }
+}
+
+
+class LeaderboardServiceApi {
+    var a = 5
+    fun submitVariable(): Int {
+        return a
+    }
+}
+
+class AndroidLeaderboard : Leaderboard {
+    private val service: LeaderboardServiceApi
+    init {
+        service = LeaderboardServiceApi()
+    }
+    override fun submitVariable(): Int {
+        return service.submitVariable()
     }
 }

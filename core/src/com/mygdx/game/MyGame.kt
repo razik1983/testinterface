@@ -1,12 +1,14 @@
 package com.mygdx.game
 
 import com.badlogic.gdx.ApplicationAdapter
+import com.badlogic.gdx.ApplicationListener
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
-class MyGame : ApplicationAdapter() {
+
+class MyGame (private val leaderboard: Leaderboard) : ApplicationAdapter() {
     private var batch: SpriteBatch? = null
     private var img: Texture? = null
     override fun create() {
@@ -27,4 +29,9 @@ class MyGame : ApplicationAdapter() {
         batch?.dispose()
         img?.dispose()
     }
+}
+
+
+interface Leaderboard {
+    fun submitVariable(): Int
 }
